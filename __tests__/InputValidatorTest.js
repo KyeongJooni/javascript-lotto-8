@@ -68,4 +68,44 @@ describe('InputValidator 테스트', () => {
       ).toEqual([1, 2, 3, 4, 5, 6]);
     });
   });
+
+  describe('보너스 번호 검증', () => {
+    test('정상적인 보너스 번호가 입력되면 숫자로 반환한다.', () => {
+      const winningNumbers = [1, 2, 3, 4, 5, 6];
+      expect(InputValidator.validateBonusNumber('7', winningNumbers)).toBe(7);
+    });
+
+    test('보너스 번호가 숫자가 아니면 예외가 발생한다.', () => {
+      const winningNumbers = [1, 2, 3, 4, 5, 6];
+      expect(() => {
+        InputValidator.validateBonusNumber('a', winningNumbers);
+      }).toThrow('[ERROR]');
+    });
+
+    test('보너스 번호가 1보다 작으면 예외가 발생한다.', () => {
+      const winningNumbers = [1, 2, 3, 4, 5, 6];
+      expect(() => {
+        InputValidator.validateBonusNumber('0', winningNumbers);
+      }).toThrow('[ERROR]');
+    });
+
+    test('보너스 번호가 45보다 크면 예외가 발생한다.', () => {
+      const winningNumbers = [1, 2, 3, 4, 5, 6];
+      expect(() => {
+        InputValidator.validateBonusNumber('46', winningNumbers);
+      }).toThrow('[ERROR]');
+    });
+
+    test('보너스 번호가 당첨 번호와 중복되면 예외가 발생한다.', () => {
+      const winningNumbers = [1, 2, 3, 4, 5, 6];
+      expect(() => {
+        InputValidator.validateBonusNumber('6', winningNumbers);
+      }).toThrow('[ERROR]');
+    });
+
+    test('공백이 포함된 보너스 번호도 정상적으로 처리한다.', () => {
+      const winningNumbers = [1, 2, 3, 4, 5, 6];
+      expect(InputValidator.validateBonusNumber(' 7 ', winningNumbers)).toBe(7);
+    });
+  });
 });
