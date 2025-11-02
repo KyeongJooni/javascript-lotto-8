@@ -1,7 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
 import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
-import InputValidator from '../validators/InputValidator.js';
+import PurchaseAmountValidator from '../validators/PurchaseAmountValidator.js';
+import WinningNumbersValidator from '../validators/WinningNumbersValidator.js';
+import BonusNumberValidator from '../validators/BonusNumberValidator.js';
 import LottoMachine from '../services/LottoMachine.js';
 import WinningStatistics from '../services/WinningStatistics.js';
 
@@ -20,7 +22,7 @@ class LottoController {
   async #getPurchaseAmount() {
     return this.#retryOnError(async () => {
       const input = await InputView.readPurchaseAmount();
-      return InputValidator.validatePurchaseAmount(input);
+      return PurchaseAmountValidator.validate(input);
     });
   }
 
@@ -32,14 +34,14 @@ class LottoController {
   async #getWinningNumbers() {
     return this.#retryOnError(async () => {
       const input = await InputView.readWinningNumbers();
-      return InputValidator.validateWinningNumbers(input);
+      return WinningNumbersValidator.validate(input);
     });
   }
 
   async #getBonusNumber(winningNumbers) {
     return this.#retryOnError(async () => {
       const input = await InputView.readBonusNumber();
-      return InputValidator.validateBonusNumber(input, winningNumbers);
+      return BonusNumberValidator.validate(input, winningNumbers);
     });
   }
 
