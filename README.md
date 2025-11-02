@@ -5,6 +5,34 @@
 ## 프로젝트 개요
 간단한 로또 발매기를 구현하는 프로젝트입니다. 사용자는 금액을 입력하여 로또를 구매하고, 당첨 번호와 비교하여 당첨 내역 및 수익률을 확인할 수 있습니다.
 
+## 프로젝트 구조
+
+```
+src/
+├── Lotto.js                    # 로또 도메인 모델
+├── App.js                      # 애플리케이션 진입점
+├── constants/                  # 상수 정의
+│   └── lottoConstants.js       # 로또 관련 상수 (숫자, 금액, 메시지 등)
+├── validators/                 # 입력 검증 (단일 책임 원칙 적용)
+│   ├── PurchaseAmountValidator.js    # 구입 금액 검증
+│   ├── WinningNumbersValidator.js    # 당첨 번호 검증
+│   └── BonusNumberValidator.js       # 보너스 번호 검증
+├── services/                   # 비즈니스 로직
+│   ├── LottoMachine.js         # 로또 생성 서비스
+│   ├── WinningChecker.js       # 당첨 확인 서비스
+│   └── WinningStatistics.js    # 당첨 통계 및 수익률 계산
+├── views/                      # 입출력 처리
+│   ├── InputView.js            # 사용자 입력
+│   └── OutputView.js           # 결과 출력
+└── controllers/                # 게임 흐름 제어
+    └── LottoController.js      # 전체 게임 흐름 조율 및 예외 처리
+```
+
+### 설계 원칙
+- **단일 책임 원칙(SRP)**: 각 클래스는 하나의 책임만 가지도록 설계
+- **관심사의 분리**: Validator, Service, View, Controller를 명확히 분리
+- **상수 관리**: 모든 매직 넘버와 문자열을 상수로 정의 (`Object.freeze()` 사용)
+
 ## 기능 목록
 
 ### 로또 발행 기능
