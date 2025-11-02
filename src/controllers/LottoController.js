@@ -1,11 +1,11 @@
 import { Console } from '@woowacourse/mission-utils';
-import InputView from '../views/InputView.js';
-import OutputView from '../views/OutputView.js';
-import PurchaseAmountValidator from '../validators/PurchaseAmountValidator.js';
-import WinningNumbersValidator from '../validators/WinningNumbersValidator.js';
-import BonusNumberValidator from '../validators/BonusNumberValidator.js';
-import LottoMachine from '../services/LottoMachine.js';
-import WinningStatistics from '../services/WinningStatistics.js';
+import { InputView, OutputView } from '../views/index.js';
+import {
+  PurchaseAmountValidator,
+  WinningNumbersValidator,
+  BonusNumberValidator,
+} from '../validators/index.js';
+import { LottoMachine, WinningStatistics } from '../services/index.js';
 
 class LottoController {
   async run() {
